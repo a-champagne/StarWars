@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/filmTitleFragment">
+
+    <fragment
+        android:id="@+id/filmTitleFragment"
+        android:name="com.example.starwars.ui.main.FilmTitleFragment"
+        android:label="film_title_fragment"
+        tools:layout="@layout/fragment_film_title" >
+        <action
+            android:id="@+id/action_filmTitleFragment_to_filmInfoFragment"
+            app:destination="@id/filmInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filmInfoFragment"
+        android:name="com.example.starwars.ui.main.FilmInfoFragment"
+        android:label="FilmInfoFragment"
+        tools:layout="@layout/fragment_film_info"
+        >
+        <argument
+            android:name="episodeId"
+            app:argType="integer" />
+    </fragment>
+</navigation>

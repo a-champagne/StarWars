@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">StarWars</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="title"> %s </string>
+    <string name="episode_id">Episode Number %s</string>
+    <string name="opening_crawl">Opening Crawl: %s</string>
+    <string name="director">Director: %s</string>
+    <plurals name="producers">
+        <item quantity="one">Producer: %s</item>
+        <item quantity="many">Producers:%s</item>
+    </plurals>
+    <string name="release_date">Release Date: %s</string>
+    <string name="species">Species</string>
+    <string name="vehicles">Vehicles</string>
+    <string name="planets">Planets</string>
+    <string name="characters">Characters</string>
+    <string name="starships">Starships</string>
+
+
+</resources>

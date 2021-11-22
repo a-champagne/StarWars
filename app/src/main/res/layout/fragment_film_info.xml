@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.starwars.ui.main.FilmInfoFragment">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.starwars.ui.main.MainViewModel" />
+    </data>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/film_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.filmInfo}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="STARWARS MOVIE INFO"
+            />
+            <TextView
+                android:id="@+id/characters_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/characters"
+                />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/film_characters_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:clipToPadding="false"
+            android:padding="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/characters_text"
+            app:charData="@{viewModel.charNames}"
+            tools:listitem="@layout/side_scroll_view">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/planets_text"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/planets"-->
+<!--                />-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/film_planets_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:scrollbars="none"-->
+<!--            android:clipToPadding="false"-->
+<!--            android:padding="16dp"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/starships_text"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/planets_text"-->
+<!--            app:planetData="@{viewModel.planetNames}"-->
+<!--            tools:listitem="@layout/side_scroll_view">-->
+
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
+<!--            <TextView-->
+<!--                android:id="@+id/starships_text"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/starships"-->
+<!--                />-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/film_starships_view"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scrollbars="none"-->
+<!--                android:clipToPadding="false"-->
+<!--                android:padding="16dp"-->
+<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/vehicles_text"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/starships_text"-->
+<!--                app:starshipData="@{viewModel.starshipNames}"-->
+<!--                tools:listitem="@layout/side_scroll_view">-->
+
+<!--            </androidx.recyclerview.widget.RecyclerView>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/vehicles_text"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/vehicles"-->
+<!--               />-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/film_vehicles_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:scrollbars="none"-->
+<!--            android:clipToPadding="false"-->
+<!--            android:padding="16dp"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/species_text"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/vehicles_text"-->
+<!--            app:vehicleData="@{viewModel.vehicleNames}"-->
+<!--            tools:listitem="@layout/side_scroll_view">-->
+
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
+<!--            <TextView-->
+<!--                android:id="@+id/species_text"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/species"-->
+<!--                />-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/film_species_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:scrollbars="none"-->
+<!--            android:clipToPadding="false"-->
+<!--            android:padding="16dp"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/species_text"-->
+<!--            app:speciesData="@{viewModel.speciesNames}"-->
+<!--            tools:listitem="@layout/side_scroll_view">-->
+
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
+        </LinearLayout>
+        </ScrollView>
+
+</layout>
