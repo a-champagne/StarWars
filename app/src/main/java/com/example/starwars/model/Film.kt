@@ -42,7 +42,8 @@ data class Film(
             ::url.name to "Url: "
         )
     override fun toString(): String {
-        return  "Episode Number: \n" +
+        return  "${this.title} \n\n"+
+                "Episode Number: \n" +
                 " ${this.episodeId} \n\n" +
                 "Opening Crawl: \n" +
                 " ${this.openingCrawl} \n\n" +

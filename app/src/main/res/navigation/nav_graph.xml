@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/filmTitleFragment"
         android:name="com.example.starwars.ui.main.FilmTitleFragment"
-        android:label="film_title_fragment"
+        android:label="Star Wars Films "
         tools:layout="@layout/fragment_film_title" >
         <action
             android:id="@+id/action_filmTitleFragment_to_filmInfoFragment"
@@ -17,11 +17,16 @@
     <fragment
         android:id="@+id/filmInfoFragment"
         android:name="com.example.starwars.ui.main.FilmInfoFragment"
-        android:label="FilmInfoFragment"
+        android:label="Film Details"
         tools:layout="@layout/fragment_film_info"
         >
         <argument
             android:name="url"
             app:argType="string" />
+        <action
+            android:id="@+id/action_filmInfoFragment_to_filmTitleFragment"
+            app:destination="@id/filmTitleFragment"
+            app:popUpTo="@id/filmTitleFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

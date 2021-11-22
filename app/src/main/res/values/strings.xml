@@ -10,11 +10,11 @@
         <item quantity="many">Producers:%s</item>
     </plurals>
     <string name="release_date">Release Date: %s</string>
-    <string name="species">Species</string>
-    <string name="vehicles">Vehicles</string>
-    <string name="planets">Planets</string>
-    <string name="characters">Characters</string>
-    <string name="starships">Starships</string>
+    <string name="species">SPECIES</string>
+    <string name="vehicles">VEHICLES</string>
+    <string name="planets">PLANETS</string>
+    <string name="characters">CHARACTERS</string>
+    <string name="starships">STARSHIPS</string>
 
 
 </resources>
