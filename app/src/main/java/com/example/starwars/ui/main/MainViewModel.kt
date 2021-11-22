@@ -7,6 +7,7 @@ import com.example.starwars.api.StarWarsApi
 import com.example.starwars.model.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import java.lang.reflect.Member
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -49,6 +50,11 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     private val _currentFilm = MutableLiveData<Film>()
         var currentFilm: LiveData<Film> = _currentFilm
+    private val _currentPerson = MutableLiveData<Person>()
+    var currentPerson: LiveData<Person> = _currentPerson
+    private val _currentPlanet = MutableLiveData<Planet>()
+    var currentPlanet: LiveData<Planet> = _currentPlanet
+
 
     private val _currentPeopleNames = MutableLiveData<List<String>>()
         var currentPeopleNames: LiveData<List<String>> = _currentPeopleNames
@@ -63,34 +69,13 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     private val _currentFilmNames = MutableLiveData<List<String>>()
         var currentFilmNames: LiveData<List<String >> =  _currentFilmNames
 
-
-
-
-
-
     private val _filmsItem = MutableLiveData<Films>()
         var filmsItem: LiveData<Films> = _filmsItem
-
-
-
 
     private val _httpError = MutableLiveData<Boolean>()
         var httpError: LiveData<Boolean> = _httpError
     private val _filmInfo = MutableLiveData<String>()
         var filmInfo : LiveData<String> = _filmInfo
-    private val _charNames = MutableLiveData<List<Member>>()
-        var charNames : LiveData<List<Member>> = _charNames
-    private val _planetNames = MutableLiveData<List<Member>>()
-        var planetNames: LiveData<List<Member>> = _planetNames
-    private val _vehicleNames = MutableLiveData<List<Member>>()
-        var vehicleNames : LiveData<List<Member>> = _vehicleNames
-    private val _starshipNames = MutableLiveData<List<Member>>()
-        var starshipNames : LiveData<List<Member>> = _starshipNames
-    private val _speciesNames = MutableLiveData<List<Member>>()
-        var speciesNames : LiveData<List<Member>> = _speciesNames
-
-
-
 
     init {
        getApiData()
@@ -98,14 +83,12 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     }
 
     private fun getApiData() {
-
             getFilms()
             getPeople()
             getSpeciess()
             getPlanets()
             getStarships()
             getVehicles()
-
     }
 
     private fun getFilms(){
@@ -123,16 +106,12 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
                         Log.e("error getting films", e.toString())
                     }
                 }
-
             } catch (e: Exception) {
                 Log.e("error getting films", e.toString())
             }
-//            for(film in filmsList)
-//                Log.d("FILM TITLE", film.toString())
             _films.value = filmsList
             populateFilmMap()
         }
-
     }
 
     private fun getPeople(){
@@ -156,7 +135,6 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
             _people.value = peopleList
             populatePeopleMap()
         }
-
     }
 
     private fun getVehicles(){
@@ -253,7 +231,7 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
 
 
    private  fun populateFilmMap() {
-        var map = mutableMapOf<String, Film>()
+        val map = mutableMapOf<String, Film>()
         for(film in _films.value ?: return) {
             map[film.url] = film
             }
@@ -261,7 +239,7 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
    }
 
     private fun populatePeopleMap() {
-        var map = mutableMapOf<String, Person>()
+        val map = mutableMapOf<String, Person>()
         for(person in _people.value ?: return) {
             map[person.url] = person
         }
@@ -269,7 +247,7 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     }
 
     private fun populateVehicleMap() {
-        var map = mutableMapOf<String, Vehicle>()
+        val map = mutableMapOf<String, Vehicle>()
         for(vehicle in _vehicles.value ?: return) {
             map[vehicle.url] = vehicle
         }
@@ -277,7 +255,7 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     }
 
     private fun populateSpeciesMap() {
-        var map = mutableMapOf<String, Species>()
+        val map = mutableMapOf<String, Species>()
         for (species in _species.value ?: return){
             map[species.url] = species
         }
@@ -285,7 +263,7 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     }
 
     private fun populatePlanetMap() {
-        var map = mutableMapOf<String, Planet>()
+        val map = mutableMapOf<String, Planet>()
         for(planet in _planets.value ?: return) {
             map[planet.url] = planet
         }
@@ -293,7 +271,7 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     }
 
     private fun populateStarshipMap() {
-        var map = mutableMapOf<String,Starship>()
+        val map = mutableMapOf<String,Starship>()
         for(starship in _starships.value ?: return){
             map[starship.url] = starship
         }
@@ -301,9 +279,26 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     }
 
     fun setCurrentFilm(url: String){
-        val film = filmUrlMap.value!!.get(url)
+        val film = filmUrlMap.value!![url]
         _currentFilm.value = film!!
         Log.d("_____currFilm____________________", _currentFilm.value.toString())
+    }
+
+    fun setCurrentPerson(url:String) {
+        val person = personUrlMap.value!![url]
+        _currentPerson.value = person!!
+    }
+
+    fun setCurrentPlanet(url: String) {
+        val planet = planetUrlMap.value!![url]
+        _currentPlanet.value = planet!!
+    }
+
+    fun setCurrentFilmNamesForCharacter() {
+        val list = mutableListOf<String>()
+        for(url in currentPerson.value?.films!!) {
+            filmUrlMap.value?.get(url)?.let { list.add(it.title) }
+        }
     }
 
     fun setCurrentPeopleNames() {
@@ -315,7 +310,7 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
         Log.d("_CURR PPL ________", _currentPeopleNames.value.toString())
     }
 
-    fun setCurrentVehicleNames() {
+    fun setCurrentVehicleNamesForFilm() {
         val list = mutableListOf<String>()
         for(url in currentFilm.value?.vehicles!!){
             vehicleUrlMap.value?.get(url)?.let { list.add(it.name) }
@@ -324,87 +319,26 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
         Log.d("current VEHICLES", _currentVehicleNames.value.toString())
     }
 
-    fun setCurrentStarshipNames() {
+    fun setCurrentStarshipNamesForFilm() {
         val list = mutableListOf<String>()
         for(url in currentFilm.value?.starships!!){
             starshipUrlMap.value?.get(url)?.let { list.add(it.name) }
         }
         _currentStarshipNames.value = list
     }
-    fun setCurrentSpeciesNames() {
+    fun setCurrentSpeciesNamesForFilm() {
         val list = mutableListOf<String>()
         for(url in currentFilm.value?.species!!){
             speciesUrlMap.value?.get(url)?.let { list.add(it.name) }
         }
         _currentSpeciesNames.value = list
     }
-    fun setCurrentPlanetNames() {
+    fun setCurrentPlanetNamesForFilm() {
         val list = mutableListOf<String>()
         for(url in currentFilm.value?.planets!!){
             planetUrlMap.value?.get(url)?.let { list.add(it.name) }
         }
         _currentPlanetNames.value = list
-    }
-
-    fun getCharNames() {
-        for (character in _currentFilm.value?.characters ?: return){
-
-        }
-    }
-
-
-//    fun getCharNamesOfFilm(film: Film) {
-//        viewModelScope.launch {
-//            val peopleUrls = film.characters
-//            for (url in peopleUrls) {
-//                val personId = url.substring(url.length - 2, url.length - 1)
-//                try {
-//                    val currPerson = StarWarsApi.retrofitService.getPerson(personId.toInt())
-//                    val id = UUID.randomUUID().toString()
-//                    val newMemb = Member(currPerson.name, id)
-//                    charsList.add(newMemb)
-//                } catch (e: Exception) {
-//                    Log.e("error_NOOB", e.toString())
-//                }
-//            }
-//            _charNames.value = charsList
-//        }
-//    }
-//
-//
-//    fun getFilmData() {
-//        viewModelScope.launch {
-//            try{
-//                _filmsItem.value = StarWarsApi.retrofitService.getFilms()
-//                Log.d("RAW DATA", StarWarsApi.retrofitService.getFilms().toString() )
-//                logFilmData()
-//               _films.value = _filmsItem.value!!.results
-//                Log.d("FILMS VALUE", _films.value.toString())
-//                _httpError.value = false
-//            } catch (e: Exception) {
-//                _httpError.value = true
-//                Log.e("error", e.toString())
-//            }
-//        }
-//    }
-//
-//    fun populateFilmData(id: Int){
-//        viewModelScope.launch {
-//            try {
-//                val filmDetails = StarWarsApi.retrofitService.getFilm(id)
-//                _currentFilm.value = filmDetails
-//                getCharNamesOfFilm(filmDetails)
-//                _filmInfo.value = filmDetails.toString()
-//                Log.d("Film DATA !!!", filmDetails.toString())
-//            } catch (e: Exception) {
-//                Log.e("error", e.toString())
-//            }
-//        }
-//
-//    }
-
-    fun logFilmData() {
-        Log.d("film data", _films.value.toString())
     }
 
 }

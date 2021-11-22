@@ -14,12 +14,19 @@
             type="com.example.starwars.ui.main.MainViewModel" />
     </data>
 
-<Button
-    android:id="@+id/button_item"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:padding="8dp"
-    android:text="@{film.title}"
-    />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="#302E2A"
+        android:padding="16dp"
+        android:scaleType="fitXY"
+        android:text="@{film.title}"
+        android:textAlignment="textStart"
+        android:textColor="#F6F322"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:text="BUTTON INFO" />
 </layout>

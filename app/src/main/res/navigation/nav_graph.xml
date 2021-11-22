@@ -28,5 +28,22 @@
             app:destination="@id/filmTitleFragment"
             app:popUpTo="@id/filmTitleFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_filmInfoFragment_to_characterInfoFragment"
+            app:destination="@id/characterInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterInfoFragment"
+        android:name="com.example.starwars.ui.main.CharacterInfoFragment"
+        android:label="fragment_character_info"
+        tools:layout="@layout/fragment_character_info" >
+        <action
+            android:id="@+id/action_characterInfoFragment_to_filmInfoFragment"
+            app:destination="@id/filmInfoFragment"
+            app:popUpTo="@id/filmInfoFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 </navigation>

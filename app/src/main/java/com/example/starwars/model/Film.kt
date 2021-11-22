@@ -4,7 +4,12 @@ import android.provider.Contacts
 import com.squareup.moshi.Json
 import kotlinx.serialization.Serializable
 
-@Serializable
+data class Films (
+    val count: Int,
+    val next: String?,
+    val results: List<Film>
+)
+
 data class Film(
     val title: String,
     @Json(name = "episode_id") val episodeId: Int,
@@ -45,7 +50,6 @@ data class Film(
         return  "${this.title} \n\n"+
                 "Episode Number: \n" +
                 " ${this.episodeId} \n\n" +
-                "Opening Crawl: \n" +
                 " ${this.openingCrawl} \n\n" +
                 "Director: \n" +
                 " ${this.director} \n\n" +

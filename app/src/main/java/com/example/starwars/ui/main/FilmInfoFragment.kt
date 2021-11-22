@@ -23,32 +23,23 @@ class FilmInfoFragment: Fragment() {
         val binding = FragmentFilmInfoBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = sharedViewModel
-        //binding.filmInfo.setText()
-         binding.filmCharactersView.adapter = FilmMemberAdapter()
+
+        binding.filmCharactersView.adapter = FilmMemberAdapter()
         binding.filmPlanetsView.adapter = FilmMemberAdapter()
         binding.filmSpeciesView.adapter = FilmMemberAdapter()
         binding.filmStarshipsView.adapter = FilmMemberAdapter()
         binding.filmVehiclesView.adapter = FilmMemberAdapter()
+
         val args: FilmInfoFragmentArgs by navArgs()
         Log.d("___ARGS URL _____", args.url)
-       sharedViewModel.setCurrentFilm(args.url)
+        sharedViewModel.setCurrentFilm(args.url)
+
         sharedViewModel.setCurrentPeopleNames()
-        sharedViewModel.setCurrentPlanetNames()
-        sharedViewModel.setCurrentSpeciesNames()
-        sharedViewModel.setCurrentStarshipNames()
-        sharedViewModel.setCurrentVehicleNames()
-
-
+        sharedViewModel.setCurrentPlanetNamesForFilm()
+        sharedViewModel.setCurrentSpeciesNamesForFilm()
+        sharedViewModel.setCurrentStarshipNamesForFilm()
+        sharedViewModel.setCurrentVehicleNamesForFilm()
 
         return binding.root
-
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-
-    }
-
 }

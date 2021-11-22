@@ -23,4 +23,25 @@ data class Planet(
     val created: String,
     val edited: String,
     val url: String
-)
+){
+    override fun toString(): String{
+        return "Name: \n" +
+                "${this.name} \n\n"+
+                "Rotation Period: \n" +
+                "${this.rotationPeriod} \n\n"+
+                "Orbital Period: \n" +
+                "${this.orbitalPeriod} \n\n"+
+                "Diameter: \n" +
+                "${this.diameter} km \n\n"+
+                "Climate: \n" +
+                "${this.climate} \n\n"+
+                "Gravity: \n" +
+                "${this.gravity} \n\n"+
+                "Terrain: \n" +
+                "${this.terrain} \n\n"+
+                "Surface Water: \n" +
+                "${this.surfaceWater} \n\n"+
+                "Population: \n" +
+                "${this.population} \n\n"
+    }
+}
