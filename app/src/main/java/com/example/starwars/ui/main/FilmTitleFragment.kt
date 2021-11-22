@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,6 +25,7 @@ class FilmTitleFragment : Fragment() {
 //    companion object {
 //        fun newInstance() = FilmTitleFragment()
 //    }
+
     private val _binding : FragmentFilmTitleBinding? = null
     private val sharedViewModel: MainViewModel by activityViewModels()
 
@@ -42,6 +44,12 @@ class FilmTitleFragment : Fragment() {
         return binding.root
 
     }
+
+//    fun navigateToNextFragment(item: String) {
+//        sharedViewModel.setCurrentFilm(item)
+//        Log.d("________FILM URL_____", item)
+//       findNavController().navigate(R.id.action_filmTitleFragment_to_filmInfoFragment)
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

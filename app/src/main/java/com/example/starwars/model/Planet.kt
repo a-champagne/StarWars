@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class Planets(
     val count: Int,
-    val next: String,
+    val next: String?,
     val results: List<Planet>
 )
 
@@ -17,11 +17,10 @@ data class Planet(
     val gravity: String,
     val terrain: String,
     @Json(name = "surface_water") val surfaceWater: String,
-    val population: String,
-    val residents: List<String>,
+    val population: String?,
+    val residents: List<String>?,
     val films: List<String>,
     val created: String,
     val edited: String,
     val url: String
-
 )

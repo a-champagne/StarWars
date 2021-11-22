@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Films (
     val count: Int,
-    val next: String,
+    val next: String?,
     val results: List<Film>
     )
 

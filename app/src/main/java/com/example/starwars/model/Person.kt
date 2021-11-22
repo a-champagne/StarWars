@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class Persons (
     val count: Int,
     val results: List<Person>,
-    val next: String
+    val next: String?
         )
 
 data class Person (
@@ -15,13 +15,13 @@ data class Person (
     val gender: String,
     @Json(name = "hair_color") val hairColor: String,
     val height: String,
-    val homeworld: String,
+    val homeworld: String?,
     val films: List<String>,
     val mass: String,
     @Json(name ="skin_color") val skinColor: String,
-    val species: List<String>,
-    val vehicles: List<String>,
-    val starships: List<String>,
+    val species: List<String>?,
+    val vehicles: List<String>?,
+    val starships: List<String>?,
     val created: String,
     val edited: String,
     val url: String

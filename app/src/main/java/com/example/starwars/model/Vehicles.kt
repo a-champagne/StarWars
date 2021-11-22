@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class Vehicles(
     val count: Int,
-    val next: String,
+    val next: String?,
     val results: List<Vehicle>
 )
 
@@ -20,8 +20,8 @@ data class Vehicle(
     @Json(name = "cargo_capacity") val cargoCapacity: String,
     val consumables: String,
     @Json(name = "vehicle_class") val vehicleClass: String,
-    val pilots: List<String>,
-    val films: List<String>,
+    val pilots: List<String>?,
+    val films: List<String>?,
     val created: String,
     val edited: String,
     val url: String

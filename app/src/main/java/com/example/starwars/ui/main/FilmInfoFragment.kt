@@ -1,6 +1,7 @@
 package com.example.starwars.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.example.starwars.databinding.FragmentFilmInfoBinding
 
 class FilmInfoFragment: Fragment() {
 
-    private val sharedViewModel: MainViewModel by activityViewModels()
+   private val sharedViewModel: MainViewModel by activityViewModels()
     private val _binding: FragmentFilmInfoBinding? = null
 
     override fun onCreateView(
@@ -24,19 +25,19 @@ class FilmInfoFragment: Fragment() {
         binding.viewModel = sharedViewModel
         //binding.filmInfo.setText()
          binding.filmCharactersView.adapter = FilmMemberAdapter()
-//        binding.filmPlanetsView.adapter = FilmMemberAdapter()
-//        binding.filmSpeciesView.adapter = FilmMemberAdapter()
-//        binding.filmStarshipsView.adapter = FilmMemberAdapter()
-//        binding.filmVehiclesView.adapter = FilmMemberAdapter()
+        binding.filmPlanetsView.adapter = FilmMemberAdapter()
+        binding.filmSpeciesView.adapter = FilmMemberAdapter()
+        binding.filmStarshipsView.adapter = FilmMemberAdapter()
+        binding.filmVehiclesView.adapter = FilmMemberAdapter()
         val args: FilmInfoFragmentArgs by navArgs()
+        Log.d("___ARGS URL _____", args.url)
+       sharedViewModel.setCurrentFilm(args.url)
+        sharedViewModel.setCurrentPeopleNames()
+        sharedViewModel.setCurrentPlanetNames()
+        sharedViewModel.setCurrentSpeciesNames()
+        sharedViewModel.setCurrentStarshipNames()
+        sharedViewModel.setCurrentVehicleNames()
 
-        if (args.episodeId != null) {
-            sharedViewModel.populateFilmData(args.episodeId)
-        }
-
-        if (_binding != null) {
-            _binding.filmInfo.text = sharedViewModel.filmInfo.value.toString()
-        }
 
 
         return binding.root

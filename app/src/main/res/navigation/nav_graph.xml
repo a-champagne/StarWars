@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_film_info"
         >
         <argument
-            android:name="episodeId"
-            app:argType="integer" />
+            android:name="url"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="member"
-            type="com.example.starwars.model.Member" />
+            name="string"
+            type="String" />
     </data>
 
     <Button
         android:id="@+id/button_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
         android:padding="8dp"
-        android:text="@{member.name}"
+        android:text="@{string}"
         />
 </layout>

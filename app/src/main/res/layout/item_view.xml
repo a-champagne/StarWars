@@ -9,6 +9,9 @@
         <variable
             name="filmTitleFragment"
             type="com.example.starwars.ui.main.FilmTitleFragment" />
+        <variable
+            name="viewModel"
+            type="com.example.starwars.ui.main.MainViewModel" />
     </data>
 
 <Button

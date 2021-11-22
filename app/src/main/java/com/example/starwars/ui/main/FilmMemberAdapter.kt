@@ -20,13 +20,13 @@ import com.example.starwars.model.Films
 import com.example.starwars.model.Member
 
 class FilmMemberAdapter
-    : ListAdapter<Member, FilmMemberAdapter.FilmMemberViewHolder>(DiffCallback) {
+    : ListAdapter<String, FilmMemberAdapter.FilmMemberViewHolder>(DiffCallback) {
 
 
     class FilmMemberViewHolder(private var binding: MemberViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(Member: Member) {
-            binding.member = Member
+        fun bind(string: String) {
+            binding.string = string
             binding.executePendingBindings()
         }
         val root = binding.root
@@ -50,22 +50,18 @@ class FilmMemberAdapter
         holder.bind(item)
 
 
-        if (item != null) {
-            Log.d("film info", item.name + item.id)
-        }
-
     }
 
 
 
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Member>() {
-        override fun areItemsTheSame(oldItem: Member, newItem: Member): Boolean {
-            return oldItem.name == newItem.name
+    companion object DiffCallback : DiffUtil.ItemCallback<String>() {
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Member, newItem: Member): Boolean {
-            return oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem.hashCode() == newItem.hashCode()
         }
 
     }

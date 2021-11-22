@@ -1,5 +1,6 @@
 package com.example.starwars.model
 
+import android.provider.Contacts
 import com.squareup.moshi.Json
 import kotlinx.serialization.Serializable
 
@@ -21,6 +22,8 @@ data class Film(
     val url: String,
 
     ){
+
+
     private val keyToStringMap : Map<String,String> =
         mapOf(
             ::title.name to "Title:",

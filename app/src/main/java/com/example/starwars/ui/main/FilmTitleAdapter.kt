@@ -47,7 +47,8 @@ class FilmTitleAdapter
         Log.d("reached", "____________________________________REACHED________________________________")
 
        holder.bind(item)
-        val action = FilmTitleFragmentDirections.actionFilmTitleFragmentToFilmInfoFragment(item.episodeId)
+        val action = FilmTitleFragmentDirections.actionFilmTitleFragmentToFilmInfoFragment(item.url)
+        Log.d("___ITEM URL___", item.url)
         holder.itemView.setOnClickListener(
             Navigation.createNavigateOnClickListener(action)
         )
@@ -57,6 +58,7 @@ class FilmTitleAdapter
         }
 
     }
+
 
 
 
