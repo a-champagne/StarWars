@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="4dp">
+    >
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_item"
@@ -10,14 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:background="#302E2A"
+        android:background="@color/button_color"
         android:backgroundTintMode="src_atop"
         android:fontFamily="@font/titan_one"
         android:scaleType="fitXY"
         android:stateListAnimator="@android:anim/bounce_interpolator"
-        android:text="@{string}"
+        android:text="@{member.name}"
         android:textAlignment="textStart"
-        android:textColor="#F6F322"
+        android:textColor="@color/StarWarsYellow"
         android:textSize="16sp"
         android:textStyle="italic"
         tools:ignore="SpeakableTextPresentCheck"
@@ -26,7 +26,7 @@
     <data>
 
         <variable
-            name="string"
-            type="String" />
+            name="member"
+            type="com.example.starwars.model.Member" />
     </data>
 </layout>

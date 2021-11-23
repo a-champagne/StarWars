@@ -21,10 +21,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class CharacterInfoFragment : Fragment() {
-    class CharacterInfoFragment: Fragment() {
-
         private val sharedViewModel: MainViewModel by activityViewModels()
-        private val _binding: FragmentCharacterInfoBinding? = null
 
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -32,26 +29,21 @@ class CharacterInfoFragment : Fragment() {
             savedInstanceState: Bundle?
         ): View? {
             val binding = FragmentCharacterInfoBinding.inflate(inflater)
-//            binding.lifecycleOwner = viewLifecycleOwner
-//            binding.viewModel = sharedViewModel
-//
-//            binding.characterCharactersView.adapter = CharacterMemberAdapter()
-//            binding.characterPlanetsView.adapter = CharacterMemberAdapter()
-//            binding.characterSpeciesView.adapter = CharacterMemberAdapter()
-//            binding.characterStarshipsView.adapter = CharacterMemberAdapter()
-//            binding.characterVehiclesView.adapter = CharacterMemberAdapter()
+            binding.lifecycleOwner = viewLifecycleOwner
+            binding.viewModel = sharedViewModel
+
+            binding.charFilmsView.adapter = CharacterMemberAdapter()
+            binding.charStarshipsView.adapter = CharacterMemberAdapter()
+            binding.charVehiclesView.adapter = CharacterMemberAdapter()
 
             val args: CharacterInfoFragmentArgs by navArgs()
-            Log.d("___ARGS URL _____", args.url)
             sharedViewModel.setCurrentPerson(args.url)
 
             sharedViewModel.setCurrentFilmNamesForCharacter()
-            sharedViewModel.setCurrentStarshipNamesForFilm()
-           // sharedViewModel.setCurrentSpeciesNames()
-            sharedViewModel.setCurrentVehicleNamesForFilm()
+            sharedViewModel.setCurrentStarshipNamesForCharacter()
+            sharedViewModel.setCurrentVehicleNamesForCharacter()
 
             return binding.root
         }
     }
 
-}

@@ -19,55 +19,18 @@ import com.example.starwars.R
 
 import com.example.starwars.databinding.FragmentFilmTitleBinding
 
-
 class FilmTitleFragment : Fragment() {
-
-//    companion object {
-//        fun newInstance() = FilmTitleFragment()
-//    }
-
-    private val _binding : FragmentFilmTitleBinding? = null
     private val sharedViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-       val binding = FragmentFilmTitleBinding.inflate(inflater)
-      binding.lifecycleOwner = this
+        val binding = FragmentFilmTitleBinding.inflate(inflater)
+        binding.lifecycleOwner = this
         binding.viewModel = sharedViewModel
-       binding.titlesView.adapter = FilmTitleAdapter()
-
-        Log.d("reached2", "____________________________________REACHED________________________________")
-
+        binding.titlesView.adapter = FilmTitleAdapter()
 
         return binding.root
-
     }
-
-//    fun navigateToNextFragment(item: String) {
-//        sharedViewModel.setCurrentFilm(item)
-//        Log.d("________FILM URL_____", item)
-//       findNavController().navigate(R.id.action_filmTitleFragment_to_filmInfoFragment)
-//    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        _binding?.apply {
-//            lifecycleOwner = viewLifecycleOwner
-//            viewModel = sharedViewModel
-//            filmTitleFragment = this@FilmTitleFragment
-//        }
-    }
-
-//    fun goToNextScreen(episodeId:Int){
-//
-//
-//        val action = FilmTitleFragmentDirections.actionFilmTitleFragmentToFilmInfoFragment(episodeId)
-//        Log.d("GOING TO NEXT FRAGMENT", "TRUE")
-//        //findNavController().navigate(action)
-//
-//    }
-
 }

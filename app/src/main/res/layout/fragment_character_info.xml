@@ -1,14 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.CharacterInfoFragment">
+    tools:context="com.example.starwars.ui.main.CharacterInfoFragment">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.starwars.ui.main.MainViewModel" />
+    </data>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:background="@color/black"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-</FrameLayout>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/char_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:fontFamily="@font/titan_one"
+                android:text="@{viewModel.currentPerson.toString()}"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#D3DF21"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/char_text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="STARWARS CHARACTER INFO" />
+
+            <TextView
+                android:id="@+id/char_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                app:layout_constraintTop_toBottomOf="@+id/char_info"
+                app:layout_constraintBottom_toTopOf="@id/char_films_view"
+                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/titan_one"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#FFED00"
+                android:textStyle="bold"
+                android:text="@string/films"  />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/char_films_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:clipToPadding="false"
+                android:isScrollContainer="false"
+                android:padding="16dp"
+                android:scrollbars="none"
+                app:charFilmData="@{viewModel.currentFilmNames}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/starships_text"
+
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/char_text"
+                app:spanCount="3"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+            <TextView
+                android:id="@+id/starships_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/starships"
+                app:layout_constraintTop_toBottomOf="@id/char_films_view"
+                app:layout_constraintBottom_toTopOf="@id/char_starships_view"
+                android:background="#000000"
+                android:fontFamily="@font/titan_one"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#FFED00"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/char_starships_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:clipToPadding="false"
+                android:background="#000000"
+                android:padding="16dp"
+                app:spanCount="3"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/vehicles_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/starships_text"
+                app:charStarshipData="@{viewModel.currentStarshipNames}"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/vehicles_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vehicles"
+                app:layout_constraintTop_toBottomOf="@id/char_starships_view"
+                app:layout_constraintBottom_toTopOf="@id/char_vehicles_view"
+                android:background="#000000"
+                android:fontFamily="@font/titan_one"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#FFED00"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/char_vehicles_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000"
+                android:clipToPadding="false"
+                android:padding="16dp"
+                android:scrollbars="none"
+                app:charVehicleData="@{viewModel.currentVehicleNames}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vehicles_text"
+                app:spanCount="3">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

@@ -7,7 +7,6 @@ import com.example.starwars.api.StarWarsApi
 import com.example.starwars.model.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import java.lang.reflect.Member
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -51,31 +50,23 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     private val _currentFilm = MutableLiveData<Film>()
         var currentFilm: LiveData<Film> = _currentFilm
     private val _currentPerson = MutableLiveData<Person>()
-    var currentPerson: LiveData<Person> = _currentPerson
+         var currentPerson: LiveData<Person> = _currentPerson
     private val _currentPlanet = MutableLiveData<Planet>()
-    var currentPlanet: LiveData<Planet> = _currentPlanet
+         var currentPlanet: LiveData<Planet> = _currentPlanet
 
 
-    private val _currentPeopleNames = MutableLiveData<List<String>>()
-        var currentPeopleNames: LiveData<List<String>> = _currentPeopleNames
-    private val _currentVehicleNames = MutableLiveData<List<String>>()
-        var currentVehicleNames: LiveData<List<String>> = _currentVehicleNames
-    private val _currentSpeciesNames = MutableLiveData<List<String>>()
-        var currentSpeciesNames: LiveData<List<String>> = _currentSpeciesNames
-    private val _currentPlanetNames = MutableLiveData<List<String>>()
-        var currentPlanetNames: LiveData<List<String>> = _currentPlanetNames
-    private val _currentStarshipNames = MutableLiveData<List<String>>()
-        var currentStarshipNames: LiveData<List<String>> = _currentStarshipNames
-    private val _currentFilmNames = MutableLiveData<List<String>>()
-        var currentFilmNames: LiveData<List<String >> =  _currentFilmNames
-
-    private val _filmsItem = MutableLiveData<Films>()
-        var filmsItem: LiveData<Films> = _filmsItem
-
-    private val _httpError = MutableLiveData<Boolean>()
-        var httpError: LiveData<Boolean> = _httpError
-    private val _filmInfo = MutableLiveData<String>()
-        var filmInfo : LiveData<String> = _filmInfo
+    private val _currentPeopleNames = MutableLiveData<List<Member>>()
+        var currentPeopleNames: LiveData<List<Member>> = _currentPeopleNames
+    private val _currentVehicleNames = MutableLiveData<List<Member>>()
+        var currentVehicleNames: LiveData<List<Member>> = _currentVehicleNames
+    private val _currentSpeciesNames = MutableLiveData<List<Member>>()
+        var currentSpeciesNames: LiveData<List<Member>> = _currentSpeciesNames
+    private val _currentPlanetNames = MutableLiveData<List<Member>>()
+        var currentPlanetNames: LiveData<List<Member>> = _currentPlanetNames
+    private val _currentStarshipNames = MutableLiveData<List<Member>>()
+        var currentStarshipNames: LiveData<List<Member>> = _currentStarshipNames
+    private val _currentFilmNames = MutableLiveData<List<Member>>()
+        var currentFilmNames: LiveData<List<Member >> =  _currentFilmNames
 
     init {
        getApiData()
@@ -281,7 +272,6 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     fun setCurrentFilm(url: String){
         val film = filmUrlMap.value!![url]
         _currentFilm.value = film!!
-        Log.d("_____currFilm____________________", _currentFilm.value.toString())
     }
 
     fun setCurrentPerson(url:String) {
@@ -295,50 +285,120 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
     }
 
     fun setCurrentFilmNamesForCharacter() {
-        val list = mutableListOf<String>()
-        for(url in currentPerson.value?.films!!) {
-            filmUrlMap.value?.get(url)?.let { list.add(it.title) }
+        val list = mutableListOf<Member>()
+        try{
+        for(url in currentPerson.value?.films!!){
+            val type = "Film"
+            val name = filmUrlMap.value!![url]!!.title
+            val item = Member(name, url, type)
+            list.add(item)
+        }
+        _currentFilmNames.value = list
+        }catch (e: Exception) {
+            Log.d("Error populating current Vehicle names", e.toString())
         }
     }
 
-    fun setCurrentPeopleNames() {
-        val list = mutableListOf<String>()
-        for(url in currentFilm.value?.characters!!){
-            personUrlMap.value?.get(url)?.let { list.add(it.name) }
+    fun setCurrentVehicleNamesForCharacter() {
+        val list = mutableListOf<Member>()
+        val vehicles = currentPerson.value?.vehicles
+        if(vehicles != null)
+        for(url in vehicles){
+            val type = "Vehicle"
+            val name = vehicleUrlMap.value!![url]!!.name
+            val item = Member(name, url, type)
+            list.add(item)
         }
-        _currentPeopleNames.value = list
-        Log.d("_CURR PPL ________", _currentPeopleNames.value.toString())
+        _currentVehicleNames.value = list
+    }
+
+    fun setCurrentStarshipNamesForCharacter() {
+        val list = mutableListOf<Member>()
+        val starships = currentPerson.value?.starships
+        if(starships != null)
+            for(url in starships){
+                val type = "Starship"
+                val name = starshipUrlMap.value!![url]!!.name
+                val item = Member(name, url, type)
+                list.add(item)
+            }
+        _currentStarshipNames.value = list
+    }
+
+    fun setCurrentPeopleNamesForFilm() {
+        val list = mutableListOf<Member>()
+        try {
+            for (url in currentFilm.value?.characters!!) {
+                val type = "Person"
+                val name = personUrlMap.value!![url]!!.name
+                val item = Member(name, url, type)
+                list.add(item)
+            }
+            _currentPeopleNames.value = list
+        } catch (e: Exception){
+            Log.d("Error populating current people names", e.toString())
+        }
     }
 
     fun setCurrentVehicleNamesForFilm() {
-        val list = mutableListOf<String>()
+        val list = mutableListOf<Member>()
+        try {
         for(url in currentFilm.value?.vehicles!!){
-            vehicleUrlMap.value?.get(url)?.let { list.add(it.name) }
+            val type = "Vehicle"
+            val name = vehicleUrlMap.value!![url]!!.name
+            val item = Member(name, url, type)
+            list.add(item)
         }
         _currentVehicleNames.value = list
+        }catch (e: Exception) {
+            Log.d("Error populating current Vehicle names", e.toString())
+        }
         Log.d("current VEHICLES", _currentVehicleNames.value.toString())
     }
 
     fun setCurrentStarshipNamesForFilm() {
-        val list = mutableListOf<String>()
+        val list = mutableListOf<Member>()
+        try {
         for(url in currentFilm.value?.starships!!){
-            starshipUrlMap.value?.get(url)?.let { list.add(it.name) }
+            val type = "Starship"
+            val name = starshipUrlMap.value!![url]!!.name
+            val item = Member(name, url, type)
+            list.add(item)
         }
         _currentStarshipNames.value = list
+        }catch (e: Exception) {
+            Log.d("Error populating current starship names", e.toString())
+        }
     }
+
     fun setCurrentSpeciesNamesForFilm() {
-        val list = mutableListOf<String>()
+        val list = mutableListOf<Member>()
+        try {
         for(url in currentFilm.value?.species!!){
-            speciesUrlMap.value?.get(url)?.let { list.add(it.name) }
+            val type = "Species"
+            val name = speciesUrlMap.value!![url]!!.name
+            val item = Member(name, url, type)
+            list.add(item)
         }
         _currentSpeciesNames.value = list
+        }catch (e: Exception) {
+            Log.d("Error populating current species names", e.toString())
+        }
     }
+
     fun setCurrentPlanetNamesForFilm() {
-        val list = mutableListOf<String>()
+        val list = mutableListOf<Member>()
+        try {
         for(url in currentFilm.value?.planets!!){
-            planetUrlMap.value?.get(url)?.let { list.add(it.name) }
+            val type = "Planet"
+            val name = planetUrlMap.value!![url]!!.name
+            val item = Member(name, url, type)
+            list.add(item)
         }
         _currentPlanetNames.value = list
+        }catch (e: Exception) {
+            Log.d("Error populating current Planet names", e.toString())
+        }
     }
 
 }

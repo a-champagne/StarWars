@@ -4,6 +4,12 @@ import android.provider.Contacts
 import com.squareup.moshi.Json
 import kotlinx.serialization.Serializable
 
+data class Member (
+    val name: String,
+    val url: String,
+    val type: String
+        )
+
 data class Films (
     val count: Int,
     val next: String?,

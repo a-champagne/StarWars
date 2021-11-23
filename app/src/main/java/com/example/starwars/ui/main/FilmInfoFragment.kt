@@ -11,9 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.starwars.databinding.FragmentFilmInfoBinding
 
 class FilmInfoFragment: Fragment() {
-
    private val sharedViewModel: MainViewModel by activityViewModels()
-    private val _binding: FragmentFilmInfoBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,10 +29,9 @@ class FilmInfoFragment: Fragment() {
         binding.filmVehiclesView.adapter = FilmMemberAdapter()
 
         val args: FilmInfoFragmentArgs by navArgs()
-        Log.d("___ARGS URL _____", args.url)
         sharedViewModel.setCurrentFilm(args.url)
 
-        sharedViewModel.setCurrentPeopleNames()
+        sharedViewModel.setCurrentPeopleNamesForFilm()
         sharedViewModel.setCurrentPlanetNamesForFilm()
         sharedViewModel.setCurrentSpeciesNamesForFilm()
         sharedViewModel.setCurrentStarshipNamesForFilm()

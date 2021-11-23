@@ -12,10 +12,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/black"
         >
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -24,14 +25,14 @@
             android:id="@+id/film_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000000"
+            android:background="@color/black"
             android:fontFamily="@font/titan_one"
             android:text="@{viewModel.currentFilm.toString()}"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#D3DF21"
+            android:textColor="@color/StarWarsYellow"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/characters_text"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="STARWARS MOVIE INFO" />
 
@@ -39,11 +40,13 @@
             android:id="@+id/characters_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000000"
+            app:layout_constraintTop_toBottomOf="@id/film_info"
+            app:layout_constraintBottom_toTopOf="@id/film_characters_view"
+            android:background="@color/black"
             android:fontFamily="@font/titan_one"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFED00"
+            android:textColor="@color/StarWarsYellow"
             android:textStyle="bold"
             android:text="@string/characters"  />
 
@@ -51,19 +54,20 @@
             android:id="@+id/film_characters_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000000"
+            android:gravity="center_horizontal"
+            android:background="@color/black"
             android:clipToPadding="false"
             android:isScrollContainer="false"
             android:padding="16dp"
             android:scrollbars="none"
-            app:charData="@{viewModel.currentPeopleNames}"
+            app:filmCharData="@{viewModel.currentPeopleNames}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/characters_text"
             app:layout_constraintBottom_toTopOf="@id/planets_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/characters_text"
             app:spanCount="3"
-            tools:listitem="@layout/side_scroll_view">
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -71,10 +75,13 @@
             android:id="@+id/planets_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000000"
+            android:gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/film_characters_view"
+            app:layout_constraintBottom_toTopOf="@id/film_planets_view"
+            android:background="@color/black"
             android:fontFamily="@font/titan_one"
             android:textAlignment="center"
-            android:textColor="#FFED00"
+            android:textColor="@color/StarWarsYellow"
             android:textStyle="bold"
             android:text="@string/planets"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -83,18 +90,19 @@
                             android:id="@+id/film_planets_view"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
                             android:scrollbars="none"
                             android:background="#000000"
                             android:clipToPadding="false"
                             android:padding="16dp"
                             app:spanCount="3"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            app:layout_constraintBottom_toTopOf="@id/starships_text"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/planets_text"
-                            app:planetData="@{viewModel.currentPlanetNames}"
-                            tools:listitem="@layout/side_scroll_view">
+                            app:layout_constraintBottom_toTopOf="@id/starships_text"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:filmPlanetData="@{viewModel.currentPlanetNames}"
+                            >
 
                         </androidx.recyclerview.widget.RecyclerView>
 
@@ -103,30 +111,33 @@
             android:id="@+id/starships_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/film_planets_view"
+            app:layout_constraintBottom_toTopOf="@id/film_starships_view"
             android:text="@string/starships"
-            android:background="#000000"
+            android:background="@color/black"
             android:fontFamily="@font/titan_one"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFED00"
+            android:textColor="@color/StarWarsYellow"
             android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/film_starships_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
                         android:scrollbars="none"
                         android:clipToPadding="false"
-                        android:background="#000000"
+                        android:background="@color/black"
                         android:padding="16dp"
                         app:spanCount="3"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/starships_text"
                         app:layout_constraintBottom_toTopOf="@id/vehicles_text"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/starships_text"
-                        app:starshipData="@{viewModel.currentStarshipNames}"
-                        tools:listitem="@layout/side_scroll_view">
+                        app:filmStarshipData="@{viewModel.currentStarshipNames}"
+                        >
 
                     </androidx.recyclerview.widget.RecyclerView>
 
@@ -134,21 +145,24 @@
             android:id="@+id/vehicles_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/film_starships_view"
+            app:layout_constraintBottom_toTopOf="@id/film_vehicles_view"
             android:text="@string/vehicles"
-            android:background="#000000"
+            android:background="@color/black"
             android:fontFamily="@font/titan_one"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFED00"
+            android:textColor="@color/StarWarsYellow"
             android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/film_vehicles_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:scrollbars="none"
                     android:clipToPadding="false"
-                        android:background="#000000"
+                    android:background="@color/black"
                     android:padding="16dp"
                     app:spanCount="3"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -156,8 +170,8 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/vehicles_text"
-                    app:vehicleData="@{viewModel.currentVehicleNames}"
-                    tools:listitem="@layout/side_scroll_view">
+                    app:filmVehicleData="@{viewModel.currentVehicleNames}"
+                    >
 
                 </androidx.recyclerview.widget.RecyclerView>
 
@@ -165,21 +179,24 @@
             android:id="@+id/species_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/film_vehicles_view"
+            app:layout_constraintBottom_toTopOf="@id/film_species_view"
             android:text="@string/species"
-            android:background="#000000"
+            android:background="@color/black"
             android:fontFamily="@font/titan_one"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FFED00"
+            android:textColor="@color/StarWarsYellow"
             android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/film_species_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:scrollbars="none"
                     android:clipToPadding="false"
-                    android:background="#000000"
+                    android:background="@color/black"
                     android:padding="16dp"
                     app:spanCount="3"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -187,12 +204,12 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/species_text"
-                    app:speciesData="@{viewModel.currentSpeciesNames}"
-                    tools:listitem="@layout/side_scroll_view">
+                    app:filmSpeciesData="@{viewModel.currentSpeciesNames}"
+                    >
 
                 </androidx.recyclerview.widget.RecyclerView>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 </layout>

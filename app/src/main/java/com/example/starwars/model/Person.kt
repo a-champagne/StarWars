@@ -28,8 +28,8 @@ data class Person (
 
     ) {
     override fun toString(): String{
-        return "Name: \n" +
-                "${this.name} \n\n" +
+
+        return  "${this.name} \n\n" +
                 "Height \n" +
                 "${this.height} cm \n\n" +
                 "Mass: \n" +
@@ -38,13 +38,12 @@ data class Person (
                 "${this.hairColor} \n\n"+
                 "Skin Color: \n" +
                 "${this.skinColor} \n\n" +
-                "SEyeColor: \n" +
+                "EyeColor: \n" +
                 "${this.eyeColor} \n\n" +
                 "Birth Year: \n" +
                 "${this.birthYear} \n\n" +
-                "SGender: \n" +
-                "${this.gender} \n\n" +
-                "Homeworld: \n" +
-                "${this.homeworld} \n\n"
+                "Gender: \n" +
+                "${this.gender} \n\n"
+
     }
 }

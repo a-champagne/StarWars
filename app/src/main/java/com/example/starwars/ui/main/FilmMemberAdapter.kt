@@ -1,37 +1,25 @@
 package com.example.starwars.ui.main
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ListAdapter
-
 import androidx.recyclerview.widget.DiffUtil
-
 import androidx.recyclerview.widget.RecyclerView
-import com.example.starwars.databinding.InfoViewBinding
-
-import com.example.starwars.databinding.ItemViewBinding
 import com.example.starwars.databinding.MemberViewBinding
-import com.example.starwars.model.Film
-import com.example.starwars.model.Films
 import com.example.starwars.model.Member
 
+
 class FilmMemberAdapter
-    : ListAdapter<String, FilmMemberAdapter.FilmMemberViewHolder>(DiffCallback) {
-
-
+    : ListAdapter<Member, FilmMemberAdapter.FilmMemberViewHolder>(DiffCallback) {
     class FilmMemberViewHolder(private var binding: MemberViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(string: String) {
-            binding.string = string
+        fun bind(Member: Member) {
+            binding.member = Member
             binding.executePendingBindings()
         }
         val root = binding.root
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmMemberAdapter.FilmMemberViewHolder {
@@ -40,30 +28,27 @@ class FilmMemberAdapter
                 LayoutInflater.from(parent.context)
             )
         )
-
-        Log.d("reached1", "____________________________________REACHED________________________________")
     }
 
     override fun onBindViewHolder(holder: FilmMemberAdapter.FilmMemberViewHolder, position: Int) {
         val item = getItem(position)
-
         holder.bind(item)
 
-
+        val action = FilmInfoFragmentDirections.actionFilmInfoFragmentToCharacterInfoFragment(item.url)
+        if(item.type == "Person") {
+            holder.itemView.setOnClickListener(
+                Navigation.createNavigateOnClickListener(action)
+            )
+        }
     }
 
-
-
-
-    companion object DiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+    companion object DiffCallback : DiffUtil.ItemCallback<Member>() {
+        override fun areItemsTheSame(oldItem: Member, newItem: Member): Boolean {
+            return oldItem.name == newItem.name
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem.hashCode() == newItem.hashCode()
+        override fun areContentsTheSame(oldItem: Member, newItem: Member): Boolean {
+            return oldItem.url == newItem.url
         }
-
     }
-
 }

@@ -35,7 +35,7 @@
     <fragment
         android:id="@+id/characterInfoFragment"
         android:name="com.example.starwars.ui.main.CharacterInfoFragment"
-        android:label="fragment_character_info"
+        android:label="Character Details"
         tools:layout="@layout/fragment_character_info" >
         <action
             android:id="@+id/action_characterInfoFragment_to_filmInfoFragment"
