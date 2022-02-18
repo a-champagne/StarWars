@@ -223,6 +223,7 @@ class MainViewModel(private val state: SavedStateHandle) : ViewModel() {
 
    private  fun populateFilmMap() {
         val map = mutableMapOf<String, Film>()
+
         for(film in _films.value ?: return) {
             map[film.url] = film
             }

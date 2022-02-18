@@ -34,24 +34,6 @@ data class Film(
 
     ){
 
-
-    private val keyToStringMap : Map<String,String> =
-        mapOf(
-            ::title.name to "Title:",
-            ::episodeId.name to "Episode Number:",
-            ::openingCrawl.name to "Opening Crawl:",
-            ::director.name to "Director: ",
-            ::producer.name to "Producer: ",
-            ::releaseDate.name to "Release Date: ",
-            ::characters.name to "Characters: ",
-            ::planets.name to "Planets: ",
-            ::starships.name to "Starships: ",
-            ::vehicles.name to "Vehicles: ",
-            ::species.name to "Species: ",
-            ::created.name to "Created: ",
-            ::edited.name to "Edited: ",
-            ::url.name to "Url: "
-        )
     override fun toString(): String {
         return  "${this.title} \n\n"+
                 "Episode Number: \n" +
