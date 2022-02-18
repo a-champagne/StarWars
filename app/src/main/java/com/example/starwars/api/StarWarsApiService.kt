@@ -9,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-
+//wrewrwerwerwerwer
 private const val API_URL = "https://swapi.py4e.com/api/"
 
 private val moshi = Moshi.Builder()
